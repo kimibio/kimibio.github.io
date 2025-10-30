@@ -1,379 +1,444 @@
-.<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="ru">
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" name="viewport"/>
-<title>kimi — Ник, появившийся в 2022</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
-<style>
-    :root{
-      --violet:#8b5cf6;
-      --violet-light:#c4b5fd;
-    }
-    body{
-      font-family:'Poppins', sans-serif;
-      background:#fff;
-      overflow-x:hidden;
-    }
-    .animated-bg{
-      background:linear-gradient(120deg,var(--violet) 0%,var(--violet-light) 50%,#fff 100%);
-      background-size:300% 300%;
-      animation:gradientShift 8s ease infinite;
-    }
-    @keyframes gradientShift{
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
-    }
-    .dot{width:8px;height:8px;background:var(--violet);border-radius:9999px;position:absolute;animation:float 6s ease-in-out infinite;opacity:.6;}
-    @keyframes float{0%{transform:translateY(0);}50%{transform:translateY(-20px);}100%{transform:translateY(0);}}
-    .card{transition:transform .4s ease, box-shadow .4s ease;}
-    .card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 25px 35px -12px rgba(0,0,0,.2);} 
-  </style>
-<style>
-:root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --card: #ffffff;
-  --accent: #8b5cf6;
-  --accent-light: #c4b5fd;
-}
-[data-theme="dark"] {
-  --bg: #0e0e0e;
-  --text: #e0e0e0;
-  --card: #1a1a1a;
-  --accent: #c4b5fd;
-  --accent-light: #a78bfa;
-}
-body {
-  background-color: var(--bg);
-  color: var(--text);
-}
-.card, article, section {
-  background-color: var(--card);
-  color: var(--text);
-}
-.text-violet-700, .text-violet-600 {
-  color: var(--accent) !important;
-}
-button.theme-toggle {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 50;
-  background: var(--accent);
-  color: white;
-  padding: 0.5rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transition: background 0.3s ease;
-}
-button.theme-toggle:hover {
-  background: var(--accent-light);
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.getElementById("theme-toggle");
-  const root = document.documentElement;
-  const stored = localStorage.getItem("kimi-theme");
-  if (stored === "dark") root.setAttribute("data-theme", "dark");
+<title>kimi — Хроники Проклятого Дома</title>
 
-  btn.addEventListener("click", () => {
-    const isDark = root.getAttribute("data-theme") === "dark";
-    if (isDark) {
-      root.removeAttribute("data-theme");
-      localStorage.setItem("kimi-theme", "light");
-    } else {
-      root.setAttribute("data-theme", "dark");
-      localStorage.setItem("kimi-theme", "dark");
+<style>
+    /* ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ДЛЯ ТЕМЫ */
+    :root{
+      --dark-black: #080808;
+      --halloween-orange: #FF5722; /* Тыквенный */
+      --halloween-green: #55B4B0; /* Болотно-зеленый */
+      --text-light: #E0CCA4; /* Бледная кость */
+      --bg: var(--dark-black);
+      --text: var(--text-light);
+      --card: #1a1a1a;
+      --accent: var(--halloween-orange); 
+      --accent-light: #ff7043;
     }
-  });
-});
-</script>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
-</head>
-<style>
-#kimi-loader {
-  position: fixed;
-  z-index: 1000;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.25rem;
-  color: #8b5cf6;
-  animation: fadeOut 2.5s ease-out 1 forwards;
-  animation-delay: 2s;
-}
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
+
+    /* 1. БАЗОВЫЙ СТИЛЬ И ФОН */
+    body{
+      /* Используем системные шрифты, похожие на Poppins */
+      font-family:'Helvetica Neue', Helvetica, sans-serif; 
+      background-color: var(--dark-black);
+      /* Смесь: Паутина (base64 SVG) + Движущийся градиент (туман) */
+      background-image: 
+          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="web" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="%23333" stroke-width="0.5" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23web)"/></svg>'),
+          radial-gradient(circle at 50% 50%, rgba(26, 26, 26, 0.9) 0%, rgba(8, 8, 8, 1) 100%);
+      background-size: auto, 400% 400%;
+      background-blend-mode: overlay, normal;
+      animation: fogMove 25s ease infinite alternate;
+      color: var(--text-light);
+      overflow-x:hidden;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+    }
+    
+    @keyframes fogMove {
+        0% { background-position: 0% 0%, 0% 0%; }
+        100% { background-position: 0% 0%, 100% 100%; }
+    }
+
+    /* Зернистость */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        pointer-events: none;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp5sKjAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAM1BMVEXh4eHj4+Pn5+fo6Ojp6eno6Ojr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29fX39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7////N7v/nAAAACHRSTlMAAAAAAAAAZ8nQjQAAAAFiS0dEAIgFTgAAAAAJcEhZcwAAFiUAABYlAUlSJ3UAAABDSURBVDjL7ZJBAoAwCENL9v//Tz0gKBYo0FhL5t5p57Q1J891c9L9d8n9t7P3P8/eR8T9V8H920j/f/o+H/W0j/f/o+H/d8n9v7P3389J8/z99F/P3j+f/k/P3r+f/y/M/X7v/nAAAAJXRFWHRkYXRhOmNyZWF0ZQAyMDI0LTA1LTIzVDE1OjIyOjE0KzAwOjAwl/3D/AAAAAlwSFlzAAAWJQAAFiUAUlSJ3UAAAAASUVORK5CYII=');
+        opacity: 0.05; 
+        z-index: -1;
+    }
+    
+    /* 2. ЭФФЕКТЫ */
+
+    /* Призрачный Текст */
+    .ghost-text {
+        position: fixed;
+        font-size: 1rem;
+        color: var(--halloween-green); 
+        opacity: 0;
+        pointer-events: none;
+        z-index: 0;
+        font-weight: 300;
+        text-transform: uppercase;
+        animation: ghostFade 15s linear infinite;
+        filter: blur(0.5px); 
+    }
+
+    @keyframes ghostFade {
+        0% { opacity: 0; transform: translate(0, 0); }
+        10% { opacity: 0.1; }
+        50% { opacity: 0; }
+        60% { opacity: 0.15; }
+        100% { opacity: 0; transform: translate(0, 0); }
+    }
+
+    /* Мерцание/Глитч */
+    .glitch-text {
+        color: var(--halloween-orange);
+        text-shadow: 
+            0 0 10px rgba(255, 87, 34, 0.8),
+            0 0 20px rgba(255, 87, 34, 0.4);
+        animation: flicker 1.5s infinite alternate;
+    }
+
+    @keyframes flicker {
+        0%, 18%, 22%, 25%, 53%, 57%, 100% {
+            opacity: 1;
+            text-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
+        }
+        20%, 24%, 55% {
+            opacity: 0.7;
+            text-shadow: 0 0 15px rgba(255, 87, 34, 1), 0 0 5px var(--halloween-green);
+            transform: skewX(-1deg);
+        }
+    }
+    
+    .animated-bg{
+      background: linear-gradient(120deg, #1f1f1f 0%, #333 100%);
+      color: var(--text-light);
+      border-bottom: 3px solid var(--halloween-orange);
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+    }
+    
+    /* 3. СТИЛЬ КАРТОЧЕК */
+    .card {
+        transition: transform .4s ease, box-shadow .4s ease; 
+        background-color: var(--card) !important; 
+        border: 1px solid #333;
+        position: relative; 
+        overflow: hidden; 
+        border-radius: 1rem; 
+        padding: 2rem; 
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card:hover {
+        transform:translateY(-6px) scale(1.02);
+        box-shadow:0 15px 25px -10px rgba(255,87,34,0.3);
+    }
+    
+    .card::after {
+        content: attr(data-prank); 
+        position: absolute;
+        top: -5px; 
+        right: -20px;
+        font-size: 5rem;
+        font-weight: 900;
+        color: var(--halloween-green);
+        opacity: 0.01; 
+        transform: rotate(15deg); 
+        pointer-events: none;
+        z-index: 10;
+        font-family: 'Times New Roman', serif;
+    }
+    
+    /* СТИЛЬ ДЛЯ ЦИТАТЫ "владелец" */
+    .owner-box {
+        background-color: #1f1f1f !important; 
+        color: var(--text-light);
+        border-left: 4px solid var(--halloween-orange) !important; 
+        box-shadow: 0 4px 10px rgba(255, 87, 34, 0.1), inset 0 0 5px rgba(255, 87, 34, 0.05);
+        transition: all 0.3s ease;
+        border-radius: 1rem; 
+        padding: 1.5rem; 
+    }
+    .owner-box:hover {
+        box-shadow: 0 6px 15px rgba(255, 87, 34, 0.2), inset 0 0 8px rgba(255, 87, 34, 0.1);
+    }
+    .owner-text-header {
+        color: var(--halloween-orange) !important;
+    }
+    
+    /* 4. УТИЛИТАРНЫЕ КЛАССЫ (Имитация Tailwind) */
+
+    .relative { position: relative; }
+    .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+    .text-center { text-align: center; }
+    .text-white { color: white; }
+    .overflow-hidden { overflow: hidden; }
+    .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+    .text-5xl { font-size: 3rem; line-height: 1; }
+    .sm\:text-6xl { font-size: 4rem; } 
+    .font-extrabold { font-weight: 800; }
+    .text-4xl { font-size: 2.25rem; }
+    .mt-4 { margin-top: 1rem; }
+    .text-lg { font-size: 1.125rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .text-sm { font-size: 0.875rem; }
+    .italic { font-style: italic; }
+    .opacity-90 { opacity: 0.9; }
+    .max-w-4xl { max-width: 56rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .grid { display: grid; }
+    .gap-8 { grid-gap: 2rem; }
+    .sm\:grid-cols-2 { grid-template-columns: 1fr; } /* По умолчанию 1 колонка */
+    @media (min-width: 640px) { /* sm breakpoint */
+        .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .text-2xl { font-size: 1.5rem; }
+    .font-semibold { font-weight: 600; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .max-w-3xl { max-width: 48rem; }
+    .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    .font-bold { font-weight: 700; }
+    .mb-4 { margin-bottom: 1rem; }
+    .text-gray-700 { color: #d1d5db; } /* Адаптация цвета */
+    .leading-relaxed { line-height: 1.625; }
+    .text-xl { font-size: 1.25rem; }
+    .text-3xl { font-size: 1.875rem; }
+    .text-gray-500 { color: #6b7280; } /* Адаптация цвета */
+    .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 2rem; }
+    .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .bg-gray-50 { background-color: #1a1a1a !important; } /* Адаптация цвета */
+    .mb-10 { margin-bottom: 2.5rem; }
+    .h-72 { height: 18rem; }
+    .sm\:h-96 { height: 24rem; }
+    .absolute { position: absolute; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .bg-cover { background-size: cover; }
+    .bg-center { background-position: center; }
+    .bg-violet-50 { background-color: #222 !important; } 
+    .text-violet-800 { color: #ccc; } 
+    .border-l-4 { border-left-width: 4px; }
+    .p-6 { padding: 1.5rem; }
+    .text-base { font-size: 1rem; }
+    .text-xs { font-size: 0.75rem; }
+    .pb-10 { padding-bottom: 2.5rem; }
+    .border-t { border-top-width: 1px; }
+    .border-gray-200 { border-color: #333; } 
+
+    /* АДАПТАЦИЯ ЦВЕТОВ К ТЕМЕ */
+    .text-violet-700 { color: var(--accent) !important; }
+    .text-violet-600 { color: var(--accent) !important; }
+    .border-violet-400 { border-color: var(--halloween-green) !important; }
+
+    /* ЛОАДЕР */
+    #kimi-loader {
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, #1a1a1a, #080808);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-size: 1.1rem;
+      color: var(--halloween-orange);
+      animation: fadeOut 2.8s ease-out 1 forwards;
+      animation-delay: 2.2s;
+      opacity: 1; /* Начальная видимость */
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    /* Эффект прокрутки/фона для заглушки Unsplash */
+    @keyframes scrollBg{0%{transform:scale(1) translateY(0);}100%{transform:scale(1.2) translateY(-10%);}}
+
+    /* СТИЛИ ДЛЯ ВСТРОЕННЫХ АНИМАЦИЙ SCROLL-ANIMATE */
+    .scroll-animate {
+        opacity: 0;
+        transition: opacity 1s ease-out, transform 0.8s ease-out;
+    }
+    .scroll-animate.animated-down {
+        transform: translateY(-20px);
+    }
+    .scroll-animate.animated-up {
+        transform: translateY(20px);
+    }
+    .scroll-animate.animated-fade {
+        transform: translateY(0);
+    }
+    .scroll-animate.is-visible {
+        opacity: 1;
+        transform: translateY(0) !important;
+    }
 </style>
-<style>
-#kimi-loader {
-  position: fixed;
-  z-index: 1000;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle, #f5f3ff, #ede9fe, #fafafa);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.15rem;
-  color: #7c3aed;
-  animation: fadeOut 2.6s ease-out 1 forwards;
-  animation-delay: 2s;
-}
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-</style>
-<style>
-#kimi-loader {
-  position: fixed;
-  z-index: 1000;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, #f4f0ff, #fff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem;
-  color: #6b21a8;
-  animation: fadeOut 2.8s ease-out 1 forwards;
-  animation-delay: 2.2s;
-}
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-</style>
+
+
 <div id="kimi-loader">
 <div class="text-center px-4">
-<span class="text-lg font-medium">ты зашёл не случайно.<br/>останься — может, узнаешь больше, чем ожидал.</span>
+<span class="text-lg font-medium">ты зашёл не случайно.<br/>останься — может, тьма раскроет тебе свои секреты.</span>
 </div>
 </div>
-<body>
-<div style="position:absolute; font-size:4rem; opacity:0.02; bottom:20%; left:5%; pointer-events:none; z-index:0;">
-  анонимность ≠ пустота
-</div>
-<button class="theme-toggle" id="theme-toggle">🌓 Тема</button>
-<div class="fixed inset-0 pointer-events-none z-0">
-<span class="dot" style="top:10%;left:20%;animation-delay:.2s"></span>
-<span class="dot" style="top:30%;left:70%;animation-delay:1s"></span>
-<span class="dot" style="top:60%;left:40%;animation-delay:2s"></span>
-<span class="dot" style="top:80%;left:80%;animation-delay:3.4s"></span>
-</div> <section class="animated-bg relative py-24 text-center text-white overflow-hidden shadow-2xl scroll-animate" data-animation="fadeIn" style="animation-delay: 0s;">
-<h1 class="text-5xl sm:text-6xl font-extrabold scroll-animate" data-animation="fadeInDown" style="animation-delay: 0s;">kimi <span class="">🍭</span></h1>
-<p class="mt-4 text-lg scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.9s;">Ник, рождённый в 2022 году и сопровождающий меня каждое мгновение</p>
-<p class="mt-2 text-sm italic opacity-90 scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.3s;">Также используется в русской версии как <strong>Кими</strong> — звучно, мягко, индивидуально</p>
-</section>
-<div class="text-center text-sm italic text-gray-500 dark:text-gray-400 mt-6">
-<span class="transition-opacity duration-1000 ease-in-out opacity-100" id="dynamic-quote">
-    молчание — это не отказ
-  </span>
-</div>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const phrases = [
-      "молчание — это не отказ",
-      "ты не узнаешь больше, чем я позволю",
-      "никаких следов не осталось",
-      "всё, что ты видишь — задумано",
-      "ты читаешь не то, что написано"
-    ];
-    let index = 0;
-    const quote = document.getElementById("dynamic-quote");
 
-    setInterval(() => {
-      quote.style.opacity = 0;
-      setTimeout(() => {
-        index = (index + 1) % phrases.length;
-        quote.textContent = phrases[index];
-        quote.style.opacity = 1;
-      }, 1000);
-    }, 20000);
-  });
+<script>
+// JavaScript для лоадера, анимации призрачного текста и прокрутки (имитация AOS)
+document.addEventListener("DOMContentLoaded", function () {
+    // 1. Инициализация "Призрачного" Текста на фоне
+    const ghostPhrases = ["Я ТЕБЯ ВИЖУ", "ТЕНЬ ЗНАЕТ", "НАБЛЮДЕНИЕ", "КОД СКРЫТ", "ШЕПОТ"];
+    const container = document.body;
+
+    for (let i = 0; i < 5; i++) {
+        const textElement = document.createElement('div');
+        textElement.className = 'ghost-text';
+        textElement.textContent = ghostPhrases[Math.floor(Math.random() * ghostPhrases.length)];
+
+        // Рандомное позиционирование для имитации "шума"
+        textElement.style.top = `${Math.random() * 100}%`;
+        textElement.style.left = `${Math.random() * 100}%`; 
+        
+        textElement.style.animationDelay = `${Math.random() * 10}s`;
+        textElement.style.animationDuration = `${15 + Math.random() * 15}s`;
+
+        container.appendChild(textElement);
+    }
+
+    // 2. Инициализация Intersection Observer (Замена AOS)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 }); // Порог видимости 10%
+
+    document.querySelectorAll(".scroll-animate").forEach(el => {
+        const animationType = el.getAttribute('data-animation') || 'fadeIn';
+        
+        // Установка начального состояния
+        if (animationType === 'fadeInDown') {
+            el.classList.add('animated-down');
+        } else if (animationType === 'fadeInUp') {
+            el.classList.add('animated-up');
+        } else {
+            el.classList.add('animated-fade');
+        }
+        
+        observer.observe(el);
+    });
+    
+    // 3. Рандомная фраза
+    const phrases = [
+      "kimi — коротко, но с проклятием",
+      "не просто псевдоним, а печать тишины",
+      "всегда рядом, но призрак",
+      "стиль как код: скрыт, но работает",
+      "🎃 — не смайл, а знак"
+    ];
+    const phraseElement = document.getElementById("kimi-phrase");
+    if(phraseElement) {
+        phraseElement.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+    }
+});
 </script>
-<section class="max-w-4xl mx-auto px-6 py-16 grid gap-8 sm:grid-cols-2 scroll-animate" data-animation="fadeIn" style="animation-delay: 0.6s;">
-<article class="card bg-white rounded-2xl p-8 shadow-lg scroll-animate" data-animation="zoomIn" data-aos="zoom-in" style="animation-delay: 0s;">
-<h2 class="text-2xl font-semibold text-violet-700 mb-2 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0.3s;">Откуда взялся?</h2>
-<p class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.9s;">В начале 2022 <strong>kimi</strong> появился как отражение моего нового этапа. С тех пор я подписываю им всё: проекты, репозитории, профили.</p>
-</article>
-<article class="card bg-white rounded-2xl p-8 shadow-lg scroll-animate" data-animation="zoomIn" style="animation-delay: 1.5s;">
-<h2 class="text-2xl font-semibold text-violet-700 mb-2 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 1.2s;">Почему всегда со мной?</h2>
-<p class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.9s;">Он короткий, звучный и заряжен энергией. Этот ник стал моим цифровым почерком — как уникальная подпись на каждом следе в сети.</p>
-</article>
-<article class="card bg-white rounded-2xl p-8 shadow-lg scroll-animate" data-animation="zoomIn" style="animation-delay: 0.9s;">
-<h2 class="text-2xl font-semibold text-violet-700 mb-2 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0.9s;">Смайл 🍭 — символ?</h2>
-<p class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.6s;">Символ <strong>🍭</strong> подчёркивает мягкость, игривость и сладкий характер ника — добавляет лёгкую визуальную подпись к имени kimi.</p>
-</article>
-<article class="card bg-white rounded-2xl p-8 shadow-lg scroll-animate" data-animation="zoomIn" style="animation-delay: 0.6s;">
-<h2 class="text-2xl font-semibold text-violet-700 mb-2 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0.6s;">Русская версия — «Кими»</h2>
-<p class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.3s;">Локализованная версия <strong>Кими</strong> звучит не менее стильно — мягко ложится в речь и остаётся узнаваемой.</p>
-</article>
-</section> <section class="max-w-3xl mx-auto px-6 py-12 scroll-animate" data-animation="fadeIn" style="animation-delay: 1.5s;">
-<div class="bg-violet-50 rounded-2xl p-8 shadow-xl">
-<h3 class="text-2xl font-bold text-violet-700 mb-4 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0.6s;">Немного грамматики — но красиво 🌸</h3>
-<p class="text-gray-700 text-lg leading-relaxed scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.6s;">Хотя <strong>kimi</strong> и <strong>Кими</strong> визуально и звучат мягко, оба варианта — <span class="text-violet-600 font-semibold">мужской род</span>. Ник склоняется, но при этом сохраняет внутреннее ощущение силы и уникальности. Он звучит уверенно, но с добротой.</p>
+
+
+</head>
+<body>
+<div style="position:absolute; font-size:4rem; opacity:0.02; bottom:20%; left:5%; pointer-events:none; z-index:0; color: var(--halloween-orange);">
+  маска ≠ пустота
 </div>
-</section> <section class="max-w-3xl mx-auto px-6 py-12 scroll-animate" data-animation="fadeIn" style="animation-delay: 1.2s;">
-<div class="bg-white border-l-8 border-violet-400 rounded-2xl p-6 shadow-lg">
-<h2 class="section-title animate__animated animate__fadeInUp">Создатель сайта о себе:</h2>
-<p class="animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
-  Хочешь знать, чей <strong>kimi</strong>?<br/>
-  Посмотри вверх. Сайт — мой. Ник — тоже.
+
+<section class="animated-bg relative py-24 text-center text-white overflow-hidden shadow-2xl scroll-animate" data-animation="fadeIn">
+<span class="flicker-hint scroll-animate" data-animation="fadeInDown" style="opacity: 0.05;">смотри внимательно</span> 
+<h1 class="text-5xl sm:text-6xl font-extrabold scroll-animate glitch-text" data-animation="fadeInDown">kimi <span class="text-4xl">🎃</span></h1>
+<p class="mt-4 text-lg scroll-animate" data-animation="fadeInUp">Псевдоним, <strong>созданный, чтобы скрывать и наблюдать</strong></p>
+<p class="mt-2 text-sm italic opacity-90 scroll-animate" data-animation="fadeInUp">Известный в русскоязычном мире как <strong>Кими</strong> — коротко, мягко, <strong>как шепот</strong></p>
+</section> 
+
+<section class="max-w-4xl mx-auto px-6 py-16 grid gap-8 sm:grid-cols-2">
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="ПРОВЕРКА">
+<h2 class="text-2xl font-semibold text-violet-700 mb-2">Смысл</h2>
+<p>В начале 2022 <strong>kimi</strong> появился как <strong>имя</strong> моего нового этапа. С тех пор я отмечаю им всё: проекты, хранилища кода, профили.</p>
+</article>
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="ОН ТУТ">
+<h2 class="text-2xl font-semibold text-violet-700 mb-2">Почему именно он?</h2>
+<p>Он короткий, звучный и насыщен энергией. Этот псевдоним стал моим цифровым именем — как уникальная печать на каждом шаге в Сети.</p>
+</article>
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="СМОТРИШЬ?">
+<h2 class="text-2xl font-semibold text-violet-700 mb-2">Символ</h2>
+<p>Символ <strong>🎃</strong> подчёркивает игривый, но жуткий оттенок псевдонима — добавляет лёгкую тень к имени kimi.</p>
+</article>
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="ТЕНЬ">
+<h2 class="text-2xl font-semibold text-violet-700 mb-2">Русская версия</h2>
+<p>Локализованная версия <strong>Кими</strong> звучит <strong>загадочно</strong> — мягко ложится в речь и остаётся узнаваемой.</p>
+</article>
+</section> 
+
+<section class="max-w-3xl mx-auto px-6 py-12 scroll-animate" data-animation="fadeIn">
+<div class="bg-violet-50 owner-box shadow-xl">
+<h3 class="text-2xl font-bold text-violet-700 mb-4">кое что ещё!</h3>
+<p class="text-gray-700 text-lg leading-relaxed">
+    Хотя kimi и Кими визуально и звучат как призрак, оба варианта — <span class="text-violet-600 font-semibold">мужской род</span>. Псевдоним склоняется, но при этом сохраняет внутреннее ощущение непоколебимой власти и уникальной тени. Он звучит тревожно, но с достоинством.
+</p>
+</div>
+</section> 
+
+<section class="max-w-3xl mx-auto px-6 py-12 scroll-animate" data-animation="fadeIn">
+<div class="owner-box rounded-2xl shadow-lg">
+<h3 class="text-xl font-semibold owner-text-header mb-2">Владелец о себе:</h3>
+<p>
+    kimi, но именно я вдохнул в него личность, дал ему стиль и сделал его частью цифровой вселенной. 🎃
 </p>
 </div>
 </section>
-<section class="text-center py-12 scroll-animate" data-animation="fadeIn" style="animation-delay: 1.2s;">
-<h2 class="text-2xl font-bold text-violet-700 mb-4 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 1.5s;">🧠 О себе без слов</h2>
-<p class="text-3xl scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.9s;">🎧 🧠 📱 ✍️ 🌌 🍭</p>
-<p class="mt-2 text-sm text-gray-500 italic scroll-animate" data-animation="fadeInUp" style="animation-delay: 1.2s;">тишина / пиксели / чистый код / микросмыслы</p>
+
+<section class="text-center py-12 scroll-animate" data-animation="fadeIn">
+<h2 class="text-2xl font-bold text-violet-700 mb-4">Метка Тени — без слов</h2>
+<p class="text-3xl">🎧 🧠 📱 ✍️ 🌌 🎃</p>
+<p class="mt-2 text-sm text-gray-500 italic">тишина / пиксели / скрытый код / Halloween</p>
 </section>
-<section class="py-20 bg-gray-50 scroll-animate" data-animation="fadeIn" style="animation-delay: 0.9s;">
+
+<section class="py-20 bg-gray-50 scroll-animate" data-animation="fadeIn">
 <div class="max-w-3xl mx-auto px-6 text-center">
-<h2 class="text-3xl font-bold mb-10 text-violet-700 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 1.2s;">Интересные значения «kimi» в разных языках</h2>
+<h2 class="text-3xl font-bold mb-10 text-violet-700">Тайные Значения «kimi» в Забытых Наречиях</h2>
 <div class="space-y-8">
-<div class="card bg-white rounded-xl p-6 shadow-md scroll-animate" data-animation="zoomIn" data-aos="flip-left" style="animation-delay: 0.3s;">
-<h3 class="text-xl font-semibold text-violet-600 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0s;">Японский (君 | きみ)</h3>
-<p class="mt-2 scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.9s;">Означает <em>«ты»</em> — тёплое, близкое обращение, подчёркивающее личное общение.</p>
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="ТЫ">
+<h3 class="text-xl font-semibold text-violet-600">Японский (君 | きみ)</h3>
+<p class="mt-2">Означает <em>«ты»</em> — личное обращение, подчёркивающее тайный сговор.</p>
 </div>
-<div class="card bg-white rounded-xl p-6 shadow-md scroll-animate" data-animation="zoomIn" style="animation-delay: 0.6s;">
-<h3 class="text-xl font-semibold text-violet-600 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0.3s;">Финский</h3>
-<p class="mt-2 scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.9s;">Короткая форма имени <em>Kimi</em> (напр., легендарный пилот Кими Райкконен) — ассоциация со скоростью и дерзостью.</p>
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="ГОНЩИК">
+<h3 class="text-xl font-semibold text-violet-600">Финский</h3>
+<p class="mt-2">Короткая форма имени <em>Kimi</em> (напр., Гонщик Кими Райкконен) — ассоциация с опасностью и скоростью.</p>
 </div>
-<div class="card bg-white rounded-xl p-6 shadow-md scroll-animate" data-animation="zoomIn" style="animation-delay: 0.3s;">
-<h3 class="text-xl font-semibold text-violet-600 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0.9s;">Суахили</h3>
-<p class="mt-2 scroll-animate" data-animation="fadeInUp" style="animation-delay: 0s;">Используется в фразе <em>«kimi cha…»</em>, где может означать «некоторые, несколько» — намёк на гибкость и многогранность.</p>
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="ЭЛИТА">
+<h3 class="text-xl font-semibold text-violet-600">Суахили</h3>
+<p class="mt-2">Используется в фразе <em>«kimi cha…»</em>, где может означать <strong>«немногие, избранные»</strong> — намёк на элитарность и скрытность.</p>
 </div>
-<div class="card bg-white rounded-xl p-6 shadow-md scroll-animate" data-animation="zoomIn" style="animation-delay: 0.3s;">
-<h3 class="text-xl font-semibold text-violet-600 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 1.2s;">Турецкий</h3>
-<p class="mt-2 scroll-animate" data-animation="fadeInUp" style="animation-delay: 0s;">Вопросительное слово <em>«kimi?»</em> — <strong>«кто?»</strong>. Символ поиска собственной идентичности.</p>
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="КТО?">
+<h3 class="text-xl font-semibold text-violet-600">Турецкий</h3>
+<p class="mt-2">Вопросительное слово <em>«kimi?»</em> — «кто?». кто-то.  .</p>
 </div>
 </div>
 </div>
-<section class="text-center py-10 scroll-animate" data-animation="fadeIn" style="animation-delay: 0.6s;">
-<h2 class="text-xl font-semibold text-violet-700 scroll-animate" data-animation="fadeInLeft" id="kimi-phrase" style="animation-delay: 1.2s;"></h2>
+<section class="text-center py-10 scroll-animate" data-animation="fadeIn">
+<h2 class="text-xl font-semibold text-violet-700" id="kimi-phrase"></h2>
 </section>
-<script>
-const phrases = [
-  "kimi — коротко, но с эффектом",
-  "не просто ник, а карта звучания",
-  "всегда рядом, но не для всех",
-  "стиль как код: читается без слов",
-  "🍭 — не смайл, а знак"
-];
-document.getElementById("kimi-phrase").textContent =
-  phrases[Math.floor(Math.random() * phrases.length)];
-</script>
-<section class="relative h-72 sm:h-96 overflow-hidden scroll-animate" data-animation="fadeIn" style="animation-delay: 0.9s;">
-<div class="absolute inset-0 bg-[url('https://source.unsplash.com/collection/190727/1600x900')] bg-cover bg-center" style="animation:scrollBg 25s linear infinite alternate;"></div>
-</section>
-<style>
-    @keyframes scrollBg{0%{transform:scale(1) translateY(0);}100%{transform:scale(1.2) translateY(-10%);}}
-  </style> <section class="text-center py-20 scroll-animate" data-animation="fadeIn" style="animation-delay: 0.6s;">
-<h2 class="text-4xl font-bold mb-6 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 1.2s;">kimi — больше, чем ник! <span class="ml-2">🍭</span></h2>
-<button class="relative inline-flex items-center px-8 py-4 bg-violet-600 text-white text-lg font-semibold rounded-full overflow-hidden shadow-xl group">
-<span class="absolute inset-0 bg-gradient-to-r from-violet-500 via-violet-400 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
-<span class="relative">Следить за путешествием</span>
-</button>
-</section>
-<section class="text-center py-10 scroll-animate" data-animation="fadeIn" style="animation-delay: 1.2s;">
-<h2 class="text-2xl text-violet-700 font-bold mb-4 scroll-animate" data-animation="fadeInLeft" style="animation-delay: 0.9s;">что ты не узнаешь</h2>
-<ul class="text-sm text-gray-500 italic space-y-1">
-<li>• моего возраста ты не найдёшь</li>
-<li>• реального имени — тоже</li>
-<li>• любимую песню? может быть…</li>
-<li>• но только если будешь слушать</li>
-</ul>
-</section>
-<section class="text-center py-10 scroll-animate" data-animation="fadeIn" style="animation-delay: 1.2s;">
-<button class="px-6 py-2 bg-violet-600 text-white rounded-full text-sm hover:bg-violet-700 transition" onclick="document.getElementById('reveal-name').style.opacity = 1">
-    скажи ник
-  </button>
-<h2 class="mt-4 opacity-0 transition-opacity duration-1000 text-2xl text-violet-700 font-bold scroll-animate" data-animation="fadeInLeft" id="reveal-name" style="animation-delay: 0.3s;">
-    kimi 🍭
-  </h2>
-</section>
-<section class="max-w-2xl mx-auto px-6 py-10 text-center scroll-animate" data-animation="fadeIn" style="animation-delay: 1.5s;">
+
+<section class="max-w-2xl mx-auto px-6 py-10 text-center scroll-animate" data-animation="fadeIn">
 <div class="bg-violet-50 text-violet-800 border-l-4 border-violet-400 p-6 rounded-xl shadow-md">
-<p class="text-base leading-relaxed scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.6s;">Я не продаю Telegram-подарки. Не связан с NFT-спамом.  
+<p class="text-base leading-relaxed">Я не продаю Telegram-подарки. Не связан с NFT-спамом.  
       Я редко появляюсь в чатах и практически не оставляю следов.  
       Не потому что скрываюсь — просто предпочитаю тишину и пространство без шума.
       меня сложно найти — и это по дизайну. Я обычный пользователь, никак не связанный с NFT-спамом или схемами обмана.</p>
 </div>
 </section>
+
 <p class="text-center text-xs text-gray-500 italic mt-4">
   Этот сайт не собирает и не обрабатывает персональные данные. Предоставляется исключительно в визуальных и художественных целях.
 </p>
-
-<section class="max-w-4xl mx-auto px-6 py-20 grid gap-10 sm:grid-cols-2 text-zinc-800 dark:text-zinc-200">
-<div class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.2s;">
-<div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 border-l-4 border-violet-400 dark:border-violet-600">
-<h3 class="text-xl font-bold mb-2">Фон</h3>
-<p class="text-sm leading-relaxed">Всё началось с имени. Просто звук. Потом оно стало отражением. Сегодня — это отпечаток.</p>
-</div>
-</div>
-<div class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.4s;">
-<div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 border-l-4 border-violet-400 dark:border-violet-600">
-<h3 class="text-xl font-bold mb-2">Звучание</h3>
-<p class="text-sm leading-relaxed">"kimi" звучит не громко. Но отзывается внутри. Он не требует внимания — он уже остался.</p>
-</div>
-</div>
-<div class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.6s;">
-<div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 border-l-4 border-violet-400 dark:border-violet-600">
-<h3 class="text-xl font-bold mb-2">Публичная версия</h3>
-<p class="text-sm leading-relaxed">Здесь — то, что можно увидеть. Но это лишь грань. Всё остальное — под поверхностью.</p>
-</div>
-</div>
-<div class="scroll-animate" data-animation="fadeInUp" style="animation-delay: 0.8s;">
-<div class="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl p-6 border-l-4 border-violet-400 dark:border-violet-600">
-<h3 class="text-xl font-bold mb-2">Что не узнаешь</h3>
-<p class="text-sm leading-relaxed">Ты можешь смотреть, читать, догадываться. Но я — вне этих слов. И ник — только оболочка.</p>
-</div>
-</div>
-</section>
-<footer class="py-10 text-center text-sm text-gray-500 border-t border-gray-200 dark:border-gray-700">
-  © 2025 • Сделано с <span class="">❤️</span> пользователем kimi 🍭
+<footer class="py-10 text-center text-sm text-gray-500 border-t border-gray-200">
+  © 2025 • Сделано с 💀 пользователем kimi 🎃
 </footer>
 <div class="text-center text-xs text-gray-400 italic pb-10">
-  P.S. NFT есть. Но никакой торговли, фишинга или подарков тут не будет :)
+  P.S. Артефакты есть. Но никакой торговли, проклятий или подарков тут не будет
 </div>
-</section>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const anim = entry.target.dataset.animation || "fadeIn";
-        entry.target.classList.add("animate__animated", "animate__" + anim);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll(".scroll-animate").forEach((el, index) => {
-    observer.observe(el);
-  });
-});
-</script>
 </body>
-</html>
+    </html>
+    
