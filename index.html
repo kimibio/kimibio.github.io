@@ -3,37 +3,42 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"/>
-<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="IE=edge" http-equiv="X-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" name="viewport"/>
-<title>kimi — Хроники Проклятого Дома</title>
+<title>kimi — Ник, появившийся в 2022</title>
 
 <style>
-    /* ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ДЛЯ ТЕМЫ */
+    /* ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ */
     :root{
-      --dark-black: #080808;
-      --halloween-orange: #FF5722; /* Тыквенный */
-      --halloween-green: #55B4B0; /* Болотно-зеленый */
-      --text-light: #E0CCA4; /* Бледная кость */
-      --bg: var(--dark-black);
-      --text: var(--text-light);
-      --card: #1a1a1a;
-      --accent: var(--halloween-orange); 
-      --accent-light: #ff7043;
+      --violet: #8b5cf6;
+      --violet-dark: #7c3aed;
+      --violet-light: #c4b5fd;
+      --violet-pale: #f5f3ff; /* Светлый фиолетовый для градиента */
+      --text-dark: #1a1a1a;
+      --bg: #ffffff;
+      --text: var(--text-dark);
+      --card: #ffffff;
+      --accent: var(--violet); 
+      --accent-light: var(--violet-light);
+      --gray-light: #f9fafb;
+      --gray-medium: #6b7280;
     }
 
     /* 1. БАЗОВЫЙ СТИЛЬ И ФОН */
     body{
-      /* Используем системные шрифты, похожие на Poppins */
       font-family:'Helvetica Neue', Helvetica, sans-serif; 
-      background-color: var(--dark-black);
-      /* Смесь: Паутина (base64 SVG) + Движущийся градиент (туман) */
-      background-image: 
-          url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="web" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="%23333" stroke-width="0.5" opacity="0.2"/></pattern></defs><rect width="100" height="100" fill="url(%23web)"/></svg>'),
-          radial-gradient(circle at 50% 50%, rgba(26, 26, 26, 0.9) 0%, rgba(8, 8, 8, 1) 100%);
-      background-size: auto, 400% 400%;
-      background-blend-mode: overlay, normal;
-      animation: fogMove 25s ease infinite alternate;
-      color: var(--text-light);
+      background: linear-gradient(
+          -45deg, 
+          var(--violet-light) 0%, 
+          var(--violet-pale) 25%, 
+          var(--bg) 50%, 
+          var(--violet-light) 75%, 
+          var(--violet-pale) 100%
+      );
+      background-size: 500% 500%; 
+      animation: dynamicShift 20s ease infinite; 
+      
+      color: var(--text);
       overflow-x:hidden;
       position: relative;
       padding: 0;
@@ -41,79 +46,64 @@
       min-height: 100vh;
     }
     
-    @keyframes fogMove {
-        0% { background-position: 0% 0%, 0% 0%; }
-        100% { background-position: 0% 0%, 100% 100%; }
+    /* KEYFRAMES для кружащегося эффекта (обновлено) */
+    @keyframes dynamicShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      25% {
+        background-position: 100% 0%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      75% {
+        background-position: 0% 100%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
-
-    /* Зернистость */
+    
+    /* Зернистость (Data URI) */
     body::before {
         content: "";
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
         pointer-events: none;
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp5sKjAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAM1BMVEXh4eHj4+Pn5+fo6Ojp6eno6Ojr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29fX39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7////N7v/nAAAACHRSTlMAAAAAAAAAZ8nQjQAAAAFiS0dEAIgFTgAAAAAJcEhZcwAAFiUAABYlAUlSJ3UAAABDSURBVDjL7ZJBAoAwCENL9v//Tz0gKBYo0FhL5t5p57Q1J891c9L9d8n9t7P3P8/eR8T9V8H920j/f/o+H/W0j/f/o+H/d8n9v7P3389J8/z99F/P3j+f/k/P3r+f/y/M/X7v/nAAAAJXRFWHRkYXRhOmNyZWF0ZQAyMDI0LTA1LTIzVDE1OjIyOjE0KzAwOjAwl/3D/AAAAAlwSFlzAAAWJQAAFiUAUlSJ3UAAAAASUVORK5CYII=');
-        opacity: 0.05; 
+        /* Data URI: Встроенное изображение шума/зерна */
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp5sKjAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAM1BMVEXh4eHj4+Pn5+fo6Ojp6eno6Ojr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT19fX29fX39/f4+Pj5+fn6+vr7+/v8/Pz9/f3+/v7////N7v/nAAAACHRSTlMAAAAAAAAAZ8nQjQAAAAFiS0dEAIgFTgAAAAAJcEhZcwAAFiUAABYlAUlSJ3UAAABDSURBVDjL7ZJBAoAwCENL9v//Tz0gKBYo0FhL5t5p57Q1J891c9L9d8n9t7P3P8/eR8T9V8H920j/f/o+H/W0j/f/o+H/d8n9v7P3389J8/z99F/P3j+f/k/P3r+f/y/M/X7v/nAAAAJXRFWHRkYXRhOmNyZWF0ZQAyMDI0LTA1LTIzVDE1OjIyOjE0KzAwOjAwl/3D/AAAAAlw1FlzAAAWJQAAFiUAUlSJ3UAAAAASUVORK5CYII=');
+        opacity: 0.01;
         z-index: -1;
     }
     
     /* 2. ЭФФЕКТЫ */
-
-    /* Призрачный Текст */
-    .ghost-text {
-        position: fixed;
-        font-size: 1rem;
-        color: var(--halloween-green); 
-        opacity: 0;
-        pointer-events: none;
-        z-index: 0;
-        font-weight: 300;
-        text-transform: uppercase;
-        animation: ghostFade 15s linear infinite;
-        filter: blur(0.5px); 
-    }
-
-    @keyframes ghostFade {
-        0% { opacity: 0; transform: translate(0, 0); }
-        10% { opacity: 0.1; }
-        50% { opacity: 0; }
-        60% { opacity: 0.15; }
-        100% { opacity: 0; transform: translate(0, 0); }
-    }
-
-    /* Мерцание/Глитч */
-    .glitch-text {
-        color: var(--halloween-orange);
-        text-shadow: 
-            0 0 10px rgba(255, 87, 34, 0.8),
-            0 0 20px rgba(255, 87, 34, 0.4);
-        animation: flicker 1.5s infinite alternate;
-    }
-
-    @keyframes flicker {
-        0%, 18%, 22%, 25%, 53%, 57%, 100% {
-            opacity: 1;
-            text-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
-        }
-        20%, 24%, 55% {
-            opacity: 0.7;
-            text-shadow: 0 0 15px rgba(255, 87, 34, 1), 0 0 5px var(--halloween-green);
-            transform: skewX(-1deg);
-        }
-    }
-    
     .animated-bg{
-      background: linear-gradient(120deg, #1f1f1f 0%, #333 100%);
-      color: var(--text-light);
-      border-bottom: 3px solid var(--halloween-orange);
-      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+      background:linear-gradient(120deg,var(--accent) 0%,var(--accent-light) 50%,var(--bg) 100%);
+      background-size:300% 300%;
+      animation:gradientShift 8s ease infinite;
+      color: var(--text-dark); 
+      border-bottom: 3px solid var(--accent);
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.1);
+    }
+    @keyframes gradientShift{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
     }
     
+    /* Эффект наклона главного баннера (Parallax/Tilt) */
+    .hero-tilt {
+        transition: transform 0.5s ease-out;
+        perspective: 1000px; /* Создает 3D пространство */
+        will-change: transform; /* Оптимизация */
+    }
+
     /* 3. СТИЛЬ КАРТОЧЕК */
     .card {
         transition: transform .4s ease, box-shadow .4s ease; 
         background-color: var(--card) !important; 
-        border: 1px solid #333;
+        border: 1px solid #ddd;
         position: relative; 
         overflow: hidden; 
         border-radius: 1rem; 
@@ -122,44 +112,26 @@
     }
     
     .card:hover {
-        transform:translateY(-6px) scale(1.02);
-        box-shadow:0 15px 25px -10px rgba(255,87,34,0.3);
-    }
-    
-    .card::after {
-        content: attr(data-prank); 
-        position: absolute;
-        top: -5px; 
-        right: -20px;
-        font-size: 5rem;
-        font-weight: 900;
-        color: var(--halloween-green);
-        opacity: 0.01; 
-        transform: rotate(15deg); 
-        pointer-events: none;
-        z-index: 10;
-        font-family: 'Times New Roman', serif;
+        /* Усиленный эффект: подъем, увеличение и легкий поворот */
+        transform:translateY(-8px) scale(1.02) rotateZ(0.5deg); 
+        box-shadow:0 15px 30px -10px rgba(139, 92, 246, 0.4); 
     }
     
     /* СТИЛЬ ДЛЯ ЦИТАТЫ "владелец" */
     .owner-box {
-        background-color: #1f1f1f !important; 
-        color: var(--text-light);
-        border-left: 4px solid var(--halloween-orange) !important; 
-        box-shadow: 0 4px 10px rgba(255, 87, 34, 0.1), inset 0 0 5px rgba(255, 87, 34, 0.05);
+        background-color: #f5f3ff !important; 
+        color: var(--text-dark);
+        border-left: 4px solid var(--accent) !important; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), inset 0 0 5px rgba(139, 92, 246, 0.05);
         transition: all 0.3s ease;
         border-radius: 1rem; 
         padding: 1.5rem; 
     }
-    .owner-box:hover {
-        box-shadow: 0 6px 15px rgba(255, 87, 34, 0.2), inset 0 0 8px rgba(255, 87, 34, 0.1);
-    }
     .owner-text-header {
-        color: var(--halloween-orange) !important;
+        color: var(--accent) !important;
     }
     
     /* 4. УТИЛИТАРНЫЕ КЛАССЫ (Имитация Tailwind) */
-
     .relative { position: relative; }
     .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
     .text-center { text-align: center; }
@@ -182,8 +154,7 @@
     .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
     .grid { display: grid; }
     .gap-8 { grid-gap: 2rem; }
-    .sm\:grid-cols-2 { grid-template-columns: 1fr; } /* По умолчанию 1 колонка */
-    @media (min-width: 640px) { /* sm breakpoint */
+    @media (min-width: 640px) { 
         .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     .text-2xl { font-size: 1.5rem; }
@@ -191,54 +162,53 @@
     .mb-2 { margin-bottom: 0.5rem; }
     .max-w-3xl { max-width: 48rem; }
     .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
-    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
     .font-bold { font-weight: 700; }
     .mb-4 { margin-bottom: 1rem; }
-    .text-gray-700 { color: #d1d5db; } /* Адаптация цвета */
+    .text-gray-700 { color: #374151; } 
     .leading-relaxed { line-height: 1.625; }
     .text-xl { font-size: 1.25rem; }
     .text-3xl { font-size: 1.875rem; }
-    .text-gray-500 { color: #6b7280; } /* Адаптация цвета */
+    .text-gray-500 { color: var(--gray-medium); } 
     .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 2rem; }
     .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
-    .bg-gray-50 { background-color: #1a1a1a !important; } /* Адаптация цвета */
-    .mb-10 { margin-bottom: 2.5rem; }
-    .h-72 { height: 18rem; }
-    .sm\:h-96 { height: 24rem; }
-    .absolute { position: absolute; }
-    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
-    .bg-cover { background-size: cover; }
-    .bg-center { background-position: center; }
-    .bg-violet-50 { background-color: #222 !important; } 
-    .text-violet-800 { color: #ccc; } 
-    .border-l-4 { border-left-width: 4px; }
-    .p-6 { padding: 1.5rem; }
-    .text-base { font-size: 1rem; }
-    .text-xs { font-size: 0.75rem; }
-    .pb-10 { padding-bottom: 2.5rem; }
-    .border-t { border-top-width: 1px; }
-    .border-gray-200 { border-color: #333; } 
-
-    /* АДАПТАЦИЯ ЦВЕТОВ К ТЕМЕ */
+    .bg-gray-50 { background-color: var(--gray-light) !important; } 
     .text-violet-700 { color: var(--accent) !important; }
     .text-violet-600 { color: var(--accent) !important; }
-    .border-violet-400 { border-color: var(--halloween-green) !important; }
+    .text-xs { font-size: 0.75rem; }
+    .border-gray-200 { border-color: #e5e7eb; } 
+    .mt-6 { margin-top: 1.5rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
 
-    /* ЛОАДЕР */
+
+    /* ЛОАДЕР И СПИННЕР */
     #kimi-loader {
       position: fixed;
       z-index: 1000;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, #1a1a1a, #080808);
+      background: linear-gradient(135deg, #f4f0ff, #fff); 
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column; /* Для выравнивания спиннера и текста */
       font-family: 'Helvetica Neue', Helvetica, sans-serif;
       font-size: 1.1rem;
-      color: var(--halloween-orange);
+      color: #6b21a8; 
       animation: fadeOut 2.8s ease-out 1 forwards;
       animation-delay: 2.2s;
-      opacity: 1; /* Начальная видимость */
+      opacity: 1; 
+    }
+    #kimi-spinner {
+        border: 4px solid var(--accent-light);
+        border-top: 4px solid var(--accent); /* Анимируемая часть */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
     @keyframes fadeOut {
       to {
@@ -246,10 +216,8 @@
         visibility: hidden;
       }
     }
-    /* Эффект прокрутки/фона для заглушки Unsplash */
-    @keyframes scrollBg{0%{transform:scale(1) translateY(0);}100%{transform:scale(1.2) translateY(-10%);}}
-
-    /* СТИЛИ ДЛЯ ВСТРОЕННЫХ АНИМАЦИЙ SCROLL-ANIMATE */
+    
+    /* СТИЛИ ДЛЯ АНИМАЦИЙ SCROLL-ANIMATE */
     .scroll-animate {
         opacity: 0;
         transition: opacity 1s ease-out, transform 0.8s ease-out;
@@ -267,20 +235,72 @@
         opacity: 1;
         transform: translateY(0) !important;
     }
+
+    /* СТИЛИ ДЛЯ ЮРИДИЧЕСКОЙ ЧАСТИ */
+    .legal-box {
+        background-color: var(--gray-light);
+        border-top: 1px solid var(--border-gray-200);
+        padding-top: 2.5rem;
+        padding-bottom: 0; 
+    }
+    .legal-statement {
+        background-color: var(--bg);
+        border: 1px solid var(--accent-light);
+        color: var(--text-dark);
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    .legal-header {
+        color: var(--accent);
+        font-weight: 700;
+    }
+    .disclaimer-list {
+        list-style-type: '⚡️ ';
+        text-align: left;
+        padding-left: 20px;
+        margin-top: 1rem;
+    }
+    .legal-disclaimer {
+        font-style: italic;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: var(--violet-pale);
+        border-radius: 0.5rem;
+    }
+    .legal-note {
+        font-size: 0.875rem;
+        color: var(--gray-medium);
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background-color: var(--violet-pale);
+        border-left: 4px solid var(--accent);
+        border-radius: 0.5rem;
+    }
+    
+    /* СТРУКТУРА ФУТЕРА */
+    .footer-section {
+        border-top: 1px dashed var(--accent-light); /* Пунктирный разделитель */
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
 </style>
 
 
 <div id="kimi-loader">
-<div class="text-center px-4">
-<span class="text-lg font-medium">ты зашёл не случайно.<br/>останься — может, тьма раскроет тебе свои секреты.</span>
-</div>
+    <div id="kimi-spinner"></div>
+    <div class="text-center px-4">
+        <span class="text-lg font-medium">ты зашёл не случайно.<br/>останься — может, узнаешь больше, чем ожидал.</span>
+    </div>
 </div>
 
 <script>
-// JavaScript для лоадера, анимации призрачного текста и прокрутки (имитация AOS)
+// JavaScript для лоадера, анимации "Призрачного" текста и эффекта прокрутки
 document.addEventListener("DOMContentLoaded", function () {
     // 1. Инициализация "Призрачного" Текста на фоне
-    const ghostPhrases = ["Я ТЕБЯ ВИЖУ", "ТЕНЬ ЗНАЕТ", "НАБЛЮДЕНИЕ", "КОД СКРЫТ", "ШЕПОТ"];
+    const ghostPhrases = ["ЧИСТЫЙ КОД", "АНАЛИТИКА", "КОД", "СЛЕЖУ", "ПИКСЕЛИ"];
     const container = document.body;
 
     for (let i = 0; i < 5; i++) {
@@ -288,12 +308,16 @@ document.addEventListener("DOMContentLoaded", function () {
         textElement.className = 'ghost-text';
         textElement.textContent = ghostPhrases[Math.floor(Math.random() * ghostPhrases.length)];
 
-        // Рандомное позиционирование для имитации "шума"
+        // Позиционирование и стили для "безопасного" призрачного текста
         textElement.style.top = `${Math.random() * 100}%`;
         textElement.style.left = `${Math.random() * 100}%`; 
-        
-        textElement.style.animationDelay = `${Math.random() * 10}s`;
-        textElement.style.animationDuration = `${15 + Math.random() * 15}s`;
+        textElement.style.color = 'rgba(139, 92, 246, 0.1)'; 
+        textElement.style.opacity = '0.05';
+        textElement.style.fontSize = '1.2rem';
+        textElement.style.position = 'absolute';
+        textElement.style.zIndex = '-1';
+        textElement.style.pointerEvents = 'none';
+        textElement.style.animation = 'none';
 
         container.appendChild(textElement);
     }
@@ -306,12 +330,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 }); // Порог видимости 10%
+    }, { threshold: 0.1 }); 
 
     document.querySelectorAll(".scroll-animate").forEach(el => {
         const animationType = el.getAttribute('data-animation') || 'fadeIn';
         
-        // Установка начального состояния
         if (animationType === 'fadeInDown') {
             el.classList.add('animated-down');
         } else if (animationType === 'fadeInUp') {
@@ -325,15 +348,36 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // 3. Рандомная фраза
     const phrases = [
-      "kimi — коротко, но с проклятием",
-      "не просто псевдоним, а печать тишины",
-      "всегда рядом, но призрак",
-      "стиль как код: скрыт, но работает",
-      "🎃 — не смайл, а знак"
+      "kimi — коротко, но с эффектом",
+      "не просто ник, а карта звучания",
+      "всегда рядом, но не для всех",
+      "стиль как код: читается без слов",
+      "🍭 — не смайл, а знак"
     ];
     const phraseElement = document.getElementById("kimi-phrase");
     if(phraseElement) {
         phraseElement.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+    }
+
+    // 4. Parallax/Tilt Effect for Hero Section (Только для десктопов)
+    const hero = document.getElementById('hero-section');
+    if (hero && window.innerWidth > 768) {
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width; // 0 to 1
+            const y = (e.clientY - rect.top) / rect.height; // 0 to 1
+
+            const rotateX = (0.5 - y) * 10; // Max 5 deg tilt up/down
+            const rotateY = (x - 0.5) * 10; // Max 5 deg tilt left/right
+
+            // Применяем 3D-трансформацию
+            hero.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+        });
+
+        hero.addEventListener('mouseleave', () => {
+            // Возврат в исходное состояние
+            hero.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        });
     }
 });
 </script>
@@ -341,79 +385,78 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </head>
 <body>
-<div style="position:absolute; font-size:4rem; opacity:0.02; bottom:20%; left:5%; pointer-events:none; z-index:0; color: var(--halloween-orange);">
-  маска ≠ пустота
+<div style="position:absolute; font-size:4rem; opacity:0.02; bottom:20%; left:5%; pointer-events:none; z-index:0; color: var(--accent);">
+  анонимность ≠ пустота
 </div>
 
-<section class="animated-bg relative py-24 text-center text-white overflow-hidden shadow-2xl scroll-animate" data-animation="fadeIn">
-<span class="flicker-hint scroll-animate" data-animation="fadeInDown" style="opacity: 0.05;">смотри внимательно</span> 
-<h1 class="text-5xl sm:text-6xl font-extrabold scroll-animate glitch-text" data-animation="fadeInDown">kimi <span class="text-4xl">🎃</span></h1>
-<p class="mt-4 text-lg scroll-animate" data-animation="fadeInUp">Псевдоним, <strong>созданный, чтобы скрывать и наблюдать</strong></p>
-<p class="mt-2 text-sm italic opacity-90 scroll-animate" data-animation="fadeInUp">Известный в русскоязычном мире как <strong>Кими</strong> — коротко, мягко, <strong>как шепот</strong></p>
+<section id="hero-section" class="animated-bg relative py-24 text-center text-white overflow-hidden shadow-2xl scroll-animate hero-tilt" data-animation="fadeIn">
+<h1 class="text-5xl sm:text-6xl font-extrabold scroll-animate" data-animation="fadeInDown">kimi <span class="text-4xl">🍭</span></h1>
+<p class="mt-4 text-lg scroll-animate" data-animation="fadeInUp">Ник, рождённый в 2022 году и сопровождающий меня каждое мгновение</p>
+<p class="mt-2 text-sm italic opacity-90 scroll-animate" data-animation="fadeInUp">Также используется в русской версии как <strong>Кими</strong> — звучно, мягко, индивидуально</p>
 </section> 
 
 <section class="max-w-4xl mx-auto px-6 py-16 grid gap-8 sm:grid-cols-2">
-<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="ПРОВЕРКА">
-<h2 class="text-2xl font-semibold text-violet-700 mb-2">Смысл</h2>
-<p>В начале 2022 <strong>kimi</strong> появился как <strong>имя</strong> моего нового этапа. С тех пор я отмечаю им всё: проекты, хранилища кода, профили.</p>
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp">
+<h2 class="text-2xl font-semibold text-violet-700 mb-2">Откуда взялся?</h2>
+<p>В начале 2022 <strong>kimi</strong> появился как отражение моего нового этапа. С тех пор я подписываю им всё: проекты, репозитории, профили.</p>
 </article>
-<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="ОН ТУТ">
-<h2 class="text-2xl font-semibold text-violet-700 mb-2">Почему именно он?</h2>
-<p>Он короткий, звучный и насыщен энергией. Этот псевдоним стал моим цифровым именем — как уникальная печать на каждом шаге в Сети.</p>
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp">
+<h2 class="text-2xl font-semibold text-violet-700 mb-2">Почему всегда со мной?</h2>
+<p>Он короткий, звучный и заряжен энергией. Этот ник стал моим цифровым почерком — как уникальная подпись на каждом следе в сети.</p>
 </article>
-<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="СМОТРИШЬ?">
-<h2 class="text-2xl font-semibold text-violet-700 mb-2">Символ</h2>
-<p>Символ <strong>🎃</strong> подчёркивает игривый, но жуткий оттенок псевдонима — добавляет лёгкую тень к имени kimi.</p>
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp">
+<h2 class="text-2xl font-semibold text-violet-700 mb-2">Символ 🍭</h2>
+<p>Символ <strong>🍭</strong> подчёркивает мягкость, игривость и сладкий характер ника — добавляет лёгкую визуальную подпись к имени kimi.</p>
 </article>
-<article class="card shadow-lg scroll-animate" data-animation="fadeInUp" data-prank="ТЕНЬ">
+<article class="card shadow-lg scroll-animate" data-animation="fadeInUp">
 <h2 class="text-2xl font-semibold text-violet-700 mb-2">Русская версия</h2>
-<p>Локализованная версия <strong>Кими</strong> звучит <strong>загадочно</strong> — мягко ложится в речь и остаётся узнаваемой.</p>
+<p>Локализованная версия <strong>Кими</strong> звучит не менее стильно — мягко ложится в речь и остаётся узнаваемой.</p>
 </article>
 </section> 
 
 <section class="max-w-3xl mx-auto px-6 py-12 scroll-animate" data-animation="fadeIn">
 <div class="bg-violet-50 owner-box shadow-xl">
-<h3 class="text-2xl font-bold text-violet-700 mb-4">кое что ещё!</h3>
+<h3 class="text-2xl font-bold text-violet-700 mb-4">Немного грамматики — но красиво 🌸</h3>
 <p class="text-gray-700 text-lg leading-relaxed">
-    Хотя kimi и Кими визуально и звучат как призрак, оба варианта — <span class="text-violet-600 font-semibold">мужской род</span>. Псевдоним склоняется, но при этом сохраняет внутреннее ощущение непоколебимой власти и уникальной тени. Он звучит тревожно, но с достоинством.
+    Хотя <strong>kimi</strong> и <strong>Кими</strong> визуально и звучат мягко, оба варианта — <span class="text-violet-600 font-semibold">мужской род</span>. Ник склоняется, но при этом сохраняет внутреннее ощущение силы и уникальности. Он звучит уверенно, но с добротой.
 </p>
 </div>
 </section> 
 
 <section class="max-w-3xl mx-auto px-6 py-12 scroll-animate" data-animation="fadeIn">
 <div class="owner-box rounded-2xl shadow-lg">
-<h3 class="text-xl font-semibold owner-text-header mb-2">Владелец о себе:</h3>
+<h3 class="text-xl font-semibold owner-text-header mb-2">Создатель сайта о себе:</h3>
 <p>
-    kimi, но именно я вдохнул в него личность, дал ему стиль и сделал его частью цифровой вселенной. 🎃
+Хочешь знать, чей ник kimi? именно я вдохнул в него личность, дал ему стиль и сделал его частью цифровой вселенной, поэтому это мой ник. 🍭
 </p>
 </div>
 </section>
 
 <section class="text-center py-12 scroll-animate" data-animation="fadeIn">
-<h2 class="text-2xl font-bold text-violet-700 mb-4">Метка Тени — без слов</h2>
-<p class="text-3xl">🎧 🧠 📱 ✍️ 🌌 🎃</p>
-<p class="mt-2 text-sm text-gray-500 italic">тишина / пиксели / скрытый код / Halloween</p>
+<h2 class="text-2xl font-bold text-violet-700 mb-4">🧠 О себе без слов</h2>
+<p class="text-3xl">🎧 🧠 📱 ✍️ 🌌 🍭</p>
+<p class="mt-2 text-sm text-gray-500 italic">тишина / пиксели / чистый код / мысли</p>
 </section>
 
 <section class="py-20 bg-gray-50 scroll-animate" data-animation="fadeIn">
 <div class="max-w-3xl mx-auto px-6 text-center">
-<h2 class="text-3xl font-bold mb-10 text-violet-700">Тайные Значения «kimi» в Забытых Наречиях</h2>
+<h2 class="text-3xl font-bold mb-10 text-violet-700">Интересные значения «kimi» в разных языках</h2>
 <div class="space-y-8">
-<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="ТЫ">
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp">
 <h3 class="text-xl font-semibold text-violet-600">Японский (君 | きみ)</h3>
-<p class="mt-2">Означает <em>«ты»</em> — личное обращение, подчёркивающее тайный сговор.</p>
+<p class="mt-2">Означает <em>«ты»</em> — тёплое, близкое обращение, подчёркивающее личное общение.</p>
 </div>
-<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="ГОНЩИК">
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp">
 <h3 class="text-xl font-semibold text-violet-600">Финский</h3>
-<p class="mt-2">Короткая форма имени <em>Kimi</em> (напр., Гонщик Кими Райкконен) — ассоциация с опасностью и скоростью.</p>
+<p class="mt-2">Короткая форма имени <em>Kimi</em> (напр., легендарный пилот Кими Райкконен) — ассоциация со скоростью и дерзостью.</p>
 </div>
-<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="ЭЛИТА">
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp">
 <h3 class="text-xl font-semibold text-violet-600">Суахили</h3>
-<p class="mt-2">Используется в фразе <em>«kimi cha…»</em>, где может означать <strong>«немногие, избранные»</strong> — намёк на элитарность и скрытность.</p>
+<p class="mt-2">Используется в фразе <em>«kimi cha…»</em>, где может означать <strong>«некоторые, несколько»</strong> — намёк на гибкость и многогранность.</p>
 </div>
-<div class="card shadow-md scroll-animate" data-animation="fadeInUp" data-prank="КТО?">
+<div class="card shadow-md scroll-animate" data-animation="fadeInUp">
 <h3 class="text-xl font-semibold text-violet-600">Турецкий</h3>
-<p class="mt-2">Вопросительное слово <em>«kimi?»</em> — «кто?». кто-то.  .</p>
+<p class="mt-2">Вопросительное слово <em>«kimi?»</em> — <strong>«кто?»</strong>. Символ поиска собственной идентичности.</p>
 </div>
 </div>
 </div>
@@ -421,24 +464,35 @@ document.addEventListener("DOMContentLoaded", function () {
 <h2 class="text-xl font-semibold text-violet-700" id="kimi-phrase"></h2>
 </section>
 
-<section class="max-w-2xl mx-auto px-6 py-10 text-center scroll-animate" data-animation="fadeIn">
-<div class="bg-violet-50 text-violet-800 border-l-4 border-violet-400 p-6 rounded-xl shadow-md">
-<p class="text-base leading-relaxed">Я не продаю Telegram-подарки. Не связан с NFT-спамом.  
-      Я редко появляюсь в чатах и практически не оставляю следов.  
-      Не потому что скрываюсь — просто предпочитаю тишину и пространство без шума.
-      меня сложно найти — и это по дизайну. Я обычный пользователь, никак не связанный с NFT-спамом или схемами обмана.</p>
-</div>
+
 </section>
 
-<p class="text-center text-xs text-gray-500 italic mt-4">
-  Этот сайт не собирает и не обрабатывает персональные данные. Предоставляется исключительно в визуальных и художественных целях.
-</p>
-<footer class="py-10 text-center text-sm text-gray-500 border-t border-gray-200">
-  © 2025 • Сделано с 💀 пользователем kimi 🎃
-</footer>
-<div class="text-center text-xs text-gray-400 italic pb-10">
-  P.S. Артефакты есть. Но никакой торговли, проклятий или подарков тут не будет
+<section id="compliance-declaration" class="legal-box text-center">
+    <div class="max-w-3xl mx-auto px-6">
+        <h2 class="text-2xl legal-header mb-6">Заявление о юридической чистоте</h2>
+        <div class="legal-statement text-left">
+            <h3 class="text-lg font-bold mb-3">Отказ от ответственности и соответствие требованиям РФ:</h3>
+            <ul class="disclaimer-list text-gray-700 text-sm leading-relaxed mb-6">
+                <li>Данный сайт <strong>не является коммерческим</strong> и создан исключительно в <strong>личных, визуальных и художественных целях</strong>.</li>
+                <li>Сайт <strong>не собирает и не обрабатывает персональные данные</strong> (ПД) пользователей. Отсутствуют формы ввода, регистрация, комментарии или сторонние аналитические скрипты (Метрика, Google Analytics и т.п.).</li>
+                <li>Сайт <strong>не использует внешние CDN</strong> или скрипты, которые могли бы передавать данные пользователей на сторонние серверы, что обеспечивает максимальный уровень "юридической чистоты" (соответствие 152-ФЗ).</li>
+                <li>Я <strong>не продаю Telegram-подарки</strong> и <strong>не связан с NFT-спамом</strong> или схемами обмана.</li>
+            </ul>
+            <p class="legal-disclaimer text-base text-gray-700">
+                Этот сайт <strong>абсолютно чист</strong> с точки зрения кода и не имеет юридических рисков, связанных со сбором данных.
+            </p>
+        </div>
+        <p class="legal-note text-gray-500 italic mt-6 mb-6">
+            P.S. NFT есть. Но никакой торговли, фишинга или подарков тут не будет :)
+        </p>
+    </div>
+</section>
+<footer>
+<div class="max-w-3xl mx-auto px-6 text-center pt-4 pb-2">
+    <div class="py-2 text-sm text-gray-500">
+        © 2025 • Сделано с <span style="color: #ef4444;">❤️</span> пользователем kimi 🍭
+    </div>
 </div>
+</footer>
 </body>
-    </html>
-    
+</html>
